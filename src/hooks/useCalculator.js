@@ -13,7 +13,7 @@ const {
 const INITIAL_VALUES = {
   [firstValueName]: "",
   [secondValueName]: "",
-  [signName]: "",
+  [signName]: "+",
   result: "",
 };
 
