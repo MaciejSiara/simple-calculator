@@ -1,0 +1,19 @@
+.select-field{
+    margin: 0 20px
+  }
+
+  .form{
+    display: flex;
+    justify-content: center;
+  }
+
+  .input{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+  }
+  
+  label{
+    padding-bottom: 5px;
+  }
+  
