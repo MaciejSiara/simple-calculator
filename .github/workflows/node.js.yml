@@ -29,11 +29,6 @@ jobs:
     - run: npm install
     - run: CI=true npm run test
     - run: echo "Test successfully!"
-    - name: Upload math result for job 1
-      uses: actions/upload-artifact@v2
-      with:
-        expires_in: 1 hour
-        path: node_modules/
 
   build:
     runs-on: ubuntu-latest
@@ -42,7 +37,7 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-
+        
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -51,7 +46,17 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: echo "Start building App"
+    - run: npm install
     - run: npm run build
     - run: echo "Build successfully!"
-    
-    
+  
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+    - run: docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - run: docker build --pull -t "$CI_REGISTRY_IMAGE" .
+    - run: docker push "$CI_REGISTRY_IMAGE"
