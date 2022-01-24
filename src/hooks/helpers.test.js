@@ -3,7 +3,7 @@ import { calculateResult } from "./helpers";
 const TEST_SCENARIOS = [
   [3, "+", 4, 7],
   [5, "-", 2, 3],
-  [6, "*", 4, 2],
+  [6, "*", 4, 24],
   [16, "/", 4, 4],
 ];
 
